@@ -1,0 +1,8 @@
+services:
+  backend:
+    build: .
+    env_file: .env
+    container_name: cnweb-backend
+    expose:
+      - 3000
+    restart: always
