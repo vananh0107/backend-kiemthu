@@ -9,38 +9,6 @@ const createPCategory = asyncHandler(async (req, res) => {
     throw new Error(err);
   }
 });
-const getPCategory = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  validateMongoDbId(id);
-  try {
-    const getPCategory = await PCategory.findById(id);
-    res.json(getPCategory);
-  } catch (err) {
-    throw new Error(err);
-  }
-});
-const getAllPCategory = asyncHandler(async (req, res) => {
-  try {
-    const getAllPCategory = await PCategory.aggregate([
-      { $sort: { title: 1, _id: 1 } },
-    ]);
-    res.json(getAllPCategory);
-  } catch (err) {
-    throw new Error(err);
-  }
-});
-const updatePCategory = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  validateMongoDbId(id);
-  try {
-    const updatePCategory = await PCategory.findByIdAndUpdate(id, req.body, {
-      new: true,
-    });
-    res.json(updatePCategory);
-  } catch (err) {
-    throw new Error(err);
-  }
-});
 const deletePCategory = asyncHandler(async (req, res) => {
   const { id } = req.params;
   validateMongoDbId(id);

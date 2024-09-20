@@ -17,6 +17,23 @@ const createUser = asyncHandler(async (req, res) => {
     throw new Error('User are already exists');
   }
 });
+const momo = asyncHandler(async (req, res) => {
+  if (req.body.resultCode === 0) {
+    const orderId = req.body.orderId; 
+    const order = await Order.findByIdAndUpdate(
+      orderId,
+      {
+        isPaid: 'Đã thanh toán',
+      },
+      {
+        new: true,
+      }
+    );
+    res.status(200).json({ message: 'Thanh toán thành công' });
+  } else {
+    res.status(400).json({ message: 'Thanh toán không thành công' });
+  }
+});
 const loginUserCtrl = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const findUser = await User.findOne({ email });
@@ -376,4 +393,5 @@ module.exports = {
   getOrdersOfUser,
   updateOrderStatus,
   author,
+  momo
 };

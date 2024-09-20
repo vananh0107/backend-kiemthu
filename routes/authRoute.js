@@ -16,7 +16,8 @@ const {
   getOrdersOfUser,
   updateOrderStatus,
   author,
-  getallUser
+  getallUser,
+  momo
 } = require('../controller/userCtrl');
 const { authMiddleware, isAdmin } = require('../middleware/authMiddleware');
 router.delete(
@@ -42,5 +43,6 @@ router.delete(
   authMiddleware,
   removeProductFromCart
 );
+router.post('/momo', momo);
 router.post('/cart', authMiddleware, userCart);
 module.exports = router;
